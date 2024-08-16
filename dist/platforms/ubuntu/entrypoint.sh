@@ -6,6 +6,16 @@ if [[ "$UNITY_SERIAL" = F* ]]; then
   dbus-uuidgen > /etc/machine-id && mkdir -p /var/lib/dbus/ && ln -sf /etc/machine-id /var/lib/dbus/machine-id
 fi
 
+
+# Install libc++ and related dependencies
+apt-get update && \
+apt-get install -y --no-install-recommends \
+libc++-dev \
+libc++abi-dev \
+libunwind-14-dev && \
+rm -rf /var/lib/apt/lists/*
+
+
 #
 # Prepare Android SDK, if needed
 # We do this here to ensure it has root permissions
